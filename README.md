@@ -176,13 +176,21 @@ Build a highly functional, secure, and user-friendly todo application with advan
 react-todo
 ├─ backend
 │  ├─ .env
+│  ├─ docs
+│  │  └─ auth-architecture.md
 │  ├─ jsconfig.json
 │  ├─ notes.txt
 │  ├─ package-lock.json
 │  ├─ package.json
+│  ├─ README.md
 │  └─ src
 │     ├─ controllers
-│     │  └─ authController.js
+│     │  ├─ archiveController.js
+│     │  ├─ authController.js
+│     │  ├─ stepController.js
+│     │  ├─ todoController.js
+│     │  ├─ trashController.js
+│     │  └─ userController.js
 │     ├─ index.js
 │     ├─ middlewares
 │     ├─ models
@@ -192,84 +200,92 @@ react-todo
 │     │  ├─ trashTodo-model.js
 │     │  └─ user-model.js
 │     ├─ routes
+│     │  ├─ archiveRoutes.js
+│     │  ├─ authRoutes.js
+│     │  ├─ stepRoutes.js
 │     │  ├─ todoRoutes.js
+│     │  ├─ tokenRoutes.js
+│     │  ├─ trashRoutes.js
 │     │  └─ userRoutes.js
 │     ├─ services
 │     │  └─ dbConnect.js
 │     └─ utils
 │        └─ cascadeRemoval.js
-└─ frontend
-   ├─ eslint.config.js
-   ├─ index.html
-   ├─ package-lock.json
-   ├─ package.json
-   ├─ postcss.config.js
-   ├─ public
-   │  ├─ vite.svg
-   │  └─ witch.png
-   ├─ README.md
-   ├─ src
-   │  ├─ App.css
-   │  ├─ App.jsx
-   │  ├─ assets
-   │  │  ├─ add.svg
-   │  │  ├─ calendar.svg
-   │  │  ├─ caret-down.svg
-   │  │  ├─ close.svg
-   │  │  ├─ delete.svg
-   │  │  ├─ due-date.svg
-   │  │  ├─ Icon.svg
-   │  │  ├─ Icon2.svg
-   │  │  ├─ Icon3.svg
-   │  │  ├─ info.svg
-   │  │  ├─ list.svg
-   │  │  ├─ logomark.svg
-   │  │  ├─ menu.svg
-   │  │  ├─ moon.svg
-   │  │  ├─ notifications.svg
-   │  │  ├─ people.svg
-   │  │  ├─ planned.svg
-   │  │  ├─ react.svg
-   │  │  ├─ repeat.svg
-   │  │  ├─ star-fill.svg
-   │  │  ├─ star.svg
-   │  │  ├─ sun.svg
-   │  │  └─ Vector.svg
-   │  ├─ components
-   │  │  ├─ edit-todo
-   │  │  │  ├─ TodoEdit.jsx
-   │  │  │  └─ TodoEditFooter.jsx
-   │  │  ├─ header
-   │  │  │  ├─ Grid.jsx
-   │  │  │  ├─ Header.jsx
-   │  │  │  ├─ Search.jsx
-   │  │  │  └─ ThemSwitcher.jsx
-   │  │  ├─ ProtectedRoute.jsx
-   │  │  ├─ sidebar
-   │  │  │  ├─ AddList.jsx
-   │  │  │  ├─ Donut.jsx
-   │  │  │  ├─ Sidebar.jsx
-   │  │  │  ├─ TaskOverView.jsx
-   │  │  │  └─ TasksNav.jsx
-   │  │  └─ todo-container
-   │  │     ├─ AddTodo.jsx
-   │  │     ├─ Completed.jsx
-   │  │     ├─ Inprogress.jsx
-   │  │     ├─ Todo.jsx
-   │  │     └─ TodoContainer.jsx
-   │  ├─ context
-   │  │  ├─ EditContext.jsx
-   │  │  ├─ ThemeContext.jsx
-   │  │  └─ VIewContext.jsx
-   │  ├─ index.css
-   │  ├─ main.jsx
-   │  ├─ pages
-   │  │  ├─ LoginPage.jsx
-   │  │  ├─ RegisterPage.jsx
-   │  │  └─ TodoPage.jsx
-   │  └─ utils
-   │     └─ auth.js
-   ├─ tailwind.config.js
-   └─ vite.config.js
+├─ frontend
+│  ├─ eslint.config.js
+│  ├─ index.html
+│  ├─ package-lock.json
+│  ├─ package.json
+│  ├─ postcss.config.js
+│  ├─ public
+│  │  ├─ vite.svg
+│  │  └─ witch.png
+│  ├─ README.md
+│  ├─ src
+│  │  ├─ App.css
+│  │  ├─ App.jsx
+│  │  ├─ assets
+│  │  │  ├─ add.svg
+│  │  │  ├─ calendar.svg
+│  │  │  ├─ caret-down.svg
+│  │  │  ├─ close.svg
+│  │  │  ├─ delete.svg
+│  │  │  ├─ due-date.svg
+│  │  │  ├─ Icon.svg
+│  │  │  ├─ Icon2.svg
+│  │  │  ├─ Icon3.svg
+│  │  │  ├─ info.svg
+│  │  │  ├─ list.svg
+│  │  │  ├─ log-out.svg
+│  │  │  ├─ logomark.svg
+│  │  │  ├─ menu.svg
+│  │  │  ├─ moon.svg
+│  │  │  ├─ notifications.svg
+│  │  │  ├─ people.svg
+│  │  │  ├─ planned.svg
+│  │  │  ├─ react.svg
+│  │  │  ├─ repeat.svg
+│  │  │  ├─ star-fill.svg
+│  │  │  ├─ star.svg
+│  │  │  ├─ sun.svg
+│  │  │  └─ Vector.svg
+│  │  ├─ components
+│  │  │  ├─ edit-todo
+│  │  │  │  ├─ TodoEdit.jsx
+│  │  │  │  └─ TodoEditFooter.jsx
+│  │  │  ├─ header
+│  │  │  │  ├─ Grid.jsx
+│  │  │  │  ├─ Header.jsx
+│  │  │  │  ├─ Search.jsx
+│  │  │  │  └─ ThemSwitcher.jsx
+│  │  │  ├─ ProtectedRoute.jsx
+│  │  │  ├─ PublicRoute.jsx
+│  │  │  ├─ sidebar
+│  │  │  │  ├─ AddList.jsx
+│  │  │  │  ├─ Donut.jsx
+│  │  │  │  ├─ Sidebar.jsx
+│  │  │  │  ├─ TaskOverView.jsx
+│  │  │  │  └─ TasksNav.jsx
+│  │  │  └─ todo-container
+│  │  │     ├─ AddTodo.jsx
+│  │  │     ├─ Completed.jsx
+│  │  │     ├─ Inprogress.jsx
+│  │  │     ├─ Todo.jsx
+│  │  │     └─ TodoContainer.jsx
+│  │  ├─ context
+│  │  │  ├─ EditContext.jsx
+│  │  │  ├─ ThemeContext.jsx
+│  │  │  └─ VIewContext.jsx
+│  │  ├─ index.css
+│  │  ├─ main.jsx
+│  │  ├─ pages
+│  │  │  ├─ LoginPage.jsx
+│  │  │  ├─ RegisterPage.jsx
+│  │  │  └─ TodoPage.jsx
+│  │  └─ utils
+│  │     └─ auth.js
+│  ├─ tailwind.config.js
+│  └─ vite.config.js
+└─ README.md
 
 ```
