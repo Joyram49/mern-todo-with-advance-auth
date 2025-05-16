@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Sen:wght@400..800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
+
+border: 2px solid #1E1E1E  checkbox
+border-top: 1.5px solid #496E4B33
+border-top: 1px solid #35793799 (footer) 
+border: 1.33px solid #F0F0F0 donut
+background: linear-gradient(358.24deg, rgba(53, 121, 55, 0.1) 1.27%, rgba(208, 255, 210, 0.1) 98.29%); text -cell
+box-shadow: 0px 1.33px 6.65px 0px #0000001A;
+ */
+
+@layer base {
+  :root {
+    /* Background Colors */
+    --background: #fbfdfc;
+    --secondary-background: #eef6ef;
+    --secondary-foreground: #fbfdfc;
+
+    /* Text Colors */
+    --text-primary: #1b281b;
+    --text-secondary: #1b281bb8;
+    --text-success: #3f9142;
+
+    /* Sidebar */
+    --sidebar-text: #1b281b;
+    --sidebar-text-active: #357937;
+    --sidebar-bg-active: #35793729;
+    --sidebar-dark-bg: #142e15;
+    --sidebar-green: #3f9142;
+
+    /* Buttons */
+    --button-bg: #35793729;
+    --button-text: #357937;
+
+    /* Icons */
+    --icon-primary: #1b281b;
+    --icon-secondary: #000000;
+
+    /* Checkboxes */
+    --checkbox-border: #1e1e1e;
+    --checkbox-active-fill: #357937;
+
+    /* Miscellaneous */
+    --todo-text: #142e159e;
+    --side-text: #1b281b96;
+  }
+
+  .dark {
+    /* Background Colors */
+    --background: #242424;
+    --secondary-background: #2c2c2c;
+    --secondary-foreground: #232323;
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-success: #3f9142;
+
+    /* Sidebar */
+    --sidebar-text: #ebebeb;
+    --sidebar-text-active: #98e19b;
+    --sidebar-bg-active: #35793729;
+    --sidebar-dark-bg: #142e15;
+    --sidebar-green: #3f9142;
+
+    /* Buttons */
+    --button-bg: #357937e0;
+    --button-text: #cfcfcf;
+
+    /* Icons */
+    --icon-primary: #ffffff;
+    --icon-secondary: #ffffff;
+
+    /* Checkboxes */
+    --checkbox-border: #1e1e1e;
+    --checkbox-active-fill: #1e1e1e;
+
+    /* Miscellaneous */
+    --todo-text: #97f69bb5;
+    --side-text: #f6fff696;
+  }
+}
+
+@layer base {
+  body {
+    @apply font-outfit;
+  }
+}
+
+@layer utilities {
+  .bg-custom-gradient {
+    background: linear-gradient(
+      0deg,
+      rgba(53, 121, 55, 0.1) 0%,
+      rgba(208, 255, 210, 0.1) 100%
+    );
+  }
+}
